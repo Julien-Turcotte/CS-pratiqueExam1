@@ -122,6 +122,8 @@ do
                 date = date.AddDays(1);
                 break;
             case "5":
+                Tempete tempete = new Tempete();
+                tempete.Impacter(jardin);
                 Console.WriteLine($"La tempête est terminée. Constatez les dégats de votre jardin! Demain est un nouveau jour, on fera le nettoyage après! ");
                 break;
             case "6":

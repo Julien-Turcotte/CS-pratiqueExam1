@@ -27,7 +27,7 @@ namespace JardinBotanique.ContenuJardin
         /// <exception cref="RessourcesInsuffisantesException"></exception>
         public void Planter(Plante plante, DateOnly date = new DateOnly())
         {
-            if (Ressources.Arroser(plante.BesoinEauParJour))
+            if (!Ressources.Arroser(plante.BesoinEauParJour)) // ajout !
             {
                 throw new RessourcesInsuffisantesException("Pas assez d'eau pour planter la plante choisie.");
             }
@@ -36,6 +36,7 @@ namespace JardinBotanique.ContenuJardin
             {
                 throw new RessourcesInsuffisantesException("Pas assez d'engrais pour planter la plante choisie.");
             }
+            Plantes.Add(plante);
         }
 
         /// <summary>
@@ -44,7 +45,10 @@ namespace JardinBotanique.ContenuJardin
         /// <param name="date">Date à laquelle les plantes ont été entretenues.</param>
         public void EntretenirPlantes(DateOnly date)
         {
-            // TODO: voir documentation de la méthode.
+            foreach (Plante plante in Plantes)
+            {
+                plante.Entretenir(Ressources, date);
+            }
         }
 
         /// <summary>

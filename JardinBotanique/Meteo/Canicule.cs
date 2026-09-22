@@ -11,9 +11,14 @@ namespace JardinBotanique.Meteo
     //       En cas d'épisode de canicule, chaque plante consomme le double de son besoin quotidien en eau.
     public class Canicule : Intemperie
     {
-        public Canicule() : base("Canicule")
-        {
+        public Canicule() : base("Canicule"){ }
 
+        public override void Impacter(Jardin jardin)
+        {
+            foreach (Plante plante in jardin.Plantes)
+            {
+                jardin.Ressources.Eau -= plante.BesoinEauParJour * 2;
+            }
         }
     }
 }
